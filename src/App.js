@@ -1,5 +1,6 @@
 import React from 'react';
 import config from './config';
+import Search from './components/search';
 import './App.css';
 
 export default class App extends React.Component {
@@ -17,18 +18,12 @@ export default class App extends React.Component {
     })
   }
 
-
-  componentDidMount() {
-    let query = 'dogs';
+  fetchResults(query) {
+    console.log('query', query)
     const maxResults = 10; // default 5
     const endpoint = 'https://www.googleapis.com/youtube/v3/search?part=snippet';
 
-    const url = `${endpoint}
-      &key=${config.API_KEY}
-      &type=video
-      &q=${query}
-      &maxResults=${maxResults}
-      `;
+    const url = `${endpoint}&key=${config.API_KEY}&type=video&q=${query}&maxResults=${maxResults}`;
 
     const options = {
       method: 'GET',
@@ -38,7 +33,7 @@ export default class App extends React.Component {
     };
 
     // console.log(config.API_KEY);
-    // console.log(url);
+    console.log(url);
 
     fetch(url, options)
       .then(res => {
@@ -57,11 +52,19 @@ export default class App extends React.Component {
   }
 
 
+  componentDidMount() {
+    this.fetchResults('dog');
+  }
+
+
   render() {
     console.log(this.state)
     return (
       <main className="App">
         init boilerplate
+        <Search 
+          onClick = {() => this.fetchResults()}
+        />
       </main>
     );
   }

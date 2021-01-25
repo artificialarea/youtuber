@@ -1,3 +1,18 @@
 .App {
   text-align: center;
 }
+
+.searchbar form {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
+}
+
+.inputgroup {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: red;
+}
